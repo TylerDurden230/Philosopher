@@ -6,7 +6,7 @@ void	ft_eat(t_philo *philo)
 
 	data = philo->data;
 	pthread_mutex_lock(&(data->fork[philo->left_fork_id]));
-	ft_print(data, philo->id, "has taken a fork");
+	ft_print(data, philo, 0);
 	if (philo->data->nb_philo == 1)
 	{
 		smart_sleep(philo->data->ttd, philo->data);
@@ -15,9 +15,9 @@ void	ft_eat(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_lock(&(data->fork[philo->right_fork_id]));
-	ft_print(data, philo->id, "has taken a fork");
+	ft_print(data, philo, 1);
 	pthread_mutex_lock(&(data->meal_check));
-	ft_print(data, philo->id, "is eating");
+	ft_print(data, philo, 2);
 	philo->last_meal_time = ft_get_time();
 	pthread_mutex_unlock(&(data->meal_check));
 	smart_sleep(data->tte, data);
@@ -36,15 +36,15 @@ void	*thread(void *void_philosopher)
 	philo = (t_philo *)void_philosopher;
 	data = philo->data;
 	if (philo->id % 2)
-		usleep(15000);
+		usleep(1500);
 	while (!(data->is_dead))
 	{
 		ft_eat(philo);
 		if (data->all_ate || data->is_dead)
 			break ;
-		ft_print(data, philo->id, "is sleeping");
+		ft_print(data, philo, 3);
 		smart_sleep(data->tts, data);
-		ft_print(data, philo->id, "is thinking");
+		ft_print(data, philo, 4);
 		i++;
 	}
 	return (NULL);

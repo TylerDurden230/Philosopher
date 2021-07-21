@@ -9,6 +9,17 @@ int	ft_error(int error)
 	return (1);
 }
 
+void	ft_check_support(t_data *d, t_philo *p, int i)
+{
+	if (d->nb_meals != -1)
+	{
+		while (i < d->nb_philo && p[i].eaten_meals == d->nb_meals)
+			i++;
+	}
+	if (i == d->nb_philo)
+		d->all_ate = 1;
+}
+
 void	ft_check(t_data *d, t_philo *p)
 {
 	int	i;
@@ -21,7 +32,7 @@ void	ft_check(t_data *d, t_philo *p)
 			pthread_mutex_lock(&(d->meal_check));
 			if (time_diff(p[i].last_meal_time, ft_get_time()) > d->ttd)
 			{
-				ft_print(d, i, "died");
+				ft_print(d, &p[i], 5);
 				d->is_dead = 1;
 			}
 			pthread_mutex_unlock(&(d->meal_check));
@@ -30,13 +41,6 @@ void	ft_check(t_data *d, t_philo *p)
 		if (d->is_dead)
 			break ;
 		i = 0;
-		if (d->nb_meals != -1)
-		{
-			while (i < d->nb_philo && p[i].eaten_meals == d->nb_meals)
-				i++;
-		}
-		if (i == d->nb_philo)
-			d->all_ate = 1;
+		ft_check_support(d, p, i);
 	}
 }
-

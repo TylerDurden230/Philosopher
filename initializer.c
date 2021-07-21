@@ -7,7 +7,7 @@ int	ft_init_mutex(t_data *data)
 	i = data->nb_philo;
 	while (--i >= 0)
 	{
-		if (pthread_mutex_init(&(data->fork[data->nb_philo]), NULL))
+		if (pthread_mutex_init(&(data->fork[i]), NULL))
 			return (1);
 	}
 	if (pthread_mutex_init(&(data->print), NULL))

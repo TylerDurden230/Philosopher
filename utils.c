@@ -53,14 +53,25 @@ void	smart_sleep(long long time, t_data *data)
 	}
 }
 
-void	ft_print(t_data *data, int id, char *string)
+void	ft_print(t_data *data, t_philo *philo, int i)
 {
 	pthread_mutex_lock(&(data->print));
 	if (!(data->is_dead))
 	{
 		printf("%lli ", ft_get_time() - data->start_time);
-		printf("%i ", id + 1);
-		printf("%s\n", string);
+		printf("Philosopher %i ", philo->id + 1);
+		if (i == 0)
+			printf("has taken the left fork %d\n", philo->left_fork_id);
+		else if (i == 1)
+			printf("has taken the right fork %d\n", philo->right_fork_id);
+		else if (i == 2)
+			printf(YELLOW "is eating\n" RESET);
+		else if (i == 3)
+			printf(CYAN "is sleeping\n" RESET);
+		else if (i == 4)
+			printf("is thinking\n");
+		else if (i == 5)
+			printf(RED "is dead\n" RESET);
 	}
 	pthread_mutex_unlock(&(data->print));
 	return ;
