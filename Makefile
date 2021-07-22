@@ -8,9 +8,9 @@ CC = 	gcc
 FLAGS = -Wall -Wextra -Werror
 
 SRCS =	main.c \
-		initializer.c \
-		utils.c \
-		check.c \
+	initializer.c \
+	utils.c \
+	check.c \
 
 OBJS =	$(SRCS:.c=.o)
 

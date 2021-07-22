@@ -34,6 +34,8 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(&(data->meal_check));
 	smart_sleep(data->tte, data);
 	(philo->eaten_meals)++;
+	if (philo->eaten_meals == data->nb_meals)
+		data->all_ate = 1;
 	pthread_mutex_unlock(&(data->fork[philo->left_fork_id]));
 	pthread_mutex_unlock(&(data->fork[philo->right_fork_id]));
 }
@@ -92,6 +94,15 @@ int	ft_start(t_data *data)
 	}
 	ft_check(data, data->philo);
 	ft_finish(data, philo);
+	if (data->nb_meals != -1)
+	{
+		i--;
+		while (i > -1) 
+		{
+			printf("Philoser %d has Eaten %d times\n", philo[i].id, philo[i].eaten_meals);
+			i--;
+		}
+	}
 	return (0);
 }
 

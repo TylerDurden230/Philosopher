@@ -77,7 +77,10 @@ void	ft_print(t_data *data, t_philo *philo, int i)
 		else if (i == 1)
 			printf("has taken the right fork %d\n", philo->right_fork_id);
 		else if (i == 2)
+		{
 			printf(YELLOW "is eating\n" RESET);
+			
+		}
 		else if (i == 3)
 			printf(CYAN "is sleeping\n" RESET);
 		else if (i == 4)
