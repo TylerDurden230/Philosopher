@@ -1,8 +1,11 @@
+
 PROG =	philo
 
 NAME =	philo.a
 
 CC = 	gcc
+
+FLAGS = -Wall -Wextra -Werror
 
 SRCS =	main.c \
 		initializer.c \
@@ -20,17 +23,16 @@ $(NAME):	$(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 	ranlib $(NAME)
 	$(CC) -o $(PROG) $(NAME)
-	$(RM) $(NAME)
-	$(RM) $(OBJS)
 	
 .c.o:
-	$(CC) -c $< -o $(<:.c=.o)
+	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
 
 clean:
 	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) $(PROG)
 	$(RMDIR) $(PROG).dSYM
 
 re: fclean all
