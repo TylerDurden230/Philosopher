@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fd-agnes <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:11:26 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/21 18:11:28 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/22 15:31:03 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,13 @@ void	ft_print(t_data *data, t_philo *philo, int i)
 	if (!(data->is_dead))
 	{
 		printf("%lli ", ft_get_time() - data->start_time);
-		printf("Philosopher %i ", philo->id);
+		printf("Philosopher %i ", philo->id + 1);
 		if (i == 0)
 			printf("has taken the left fork %d\n", philo->left_fork_id);
 		else if (i == 1)
 			printf("has taken the right fork %d\n", philo->right_fork_id);
 		else if (i == 2)
-		{
 			printf(YELLOW "is eating\n" RESET);
-			
-		}
 		else if (i == 3)
 			printf(CYAN "is sleeping\n" RESET);
 		else if (i == 4)

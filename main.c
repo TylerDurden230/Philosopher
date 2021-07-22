@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fd-agnes <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:11:13 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/21 18:11:15 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/22 16:22:32 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,24 +82,24 @@ int	ft_start(t_data *data)
 	int		i;
 	t_philo	*philo;
 
-	i = 0;
+	i = -1;
 	philo = data->philo;
 	data->start_time = ft_get_time();
-	while (i < data->nb_philo)
+	while (++i < data->nb_philo)
 	{
 		if (pthread_create(&(philo[i].thread_id), NULL, thread, &(philo[i])))
 			return (1);
 		philo[i].last_meal_time = ft_get_time();
-		i++;
 	}
 	ft_check(data, data->philo);
 	ft_finish(data, philo);
 	if (data->nb_meals != -1)
 	{
 		i--;
-		while (i > -1) 
+		while (i > -1)
 		{
-			printf("Philoser %d has Eaten %d times\n", philo[i].id, philo[i].eaten_meals);
+			printf("Philosopher %d has eaten %d times\n",
+				 philo[i].id + 1, philo[i].eaten_meals);
 			i--;
 		}
 	}
@@ -113,7 +113,10 @@ int	main(int ac, char **av)
 
 	err = 0;
 	if (ac < 5 || ac > 6)
-		write(1, "Error: Wrong number of arguments\n", 33);
+	{
+		write(2, "Error: Wrong number of arguments\n", 33);
+		return (0);
+	}
 	err = ft_init(&data, av);
 	if (err)
 		return (ft_error(err));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fd-agnes <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:10:52 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/21 18:10:56 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/22 15:24:38 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_check_support(t_data *d, t_philo *p, int i)
 	}
 	if (i == d->nb_philo)
 		d->all_ate = 1;
-
 }
 
 void	ft_check(t_data *d, t_philo *p)
@@ -57,6 +56,6 @@ void	ft_check(t_data *d, t_philo *p)
 		if (d->is_dead)
 			break ;
 		i = 0;
-		//ft_check_support(d, p, i);
+		ft_check_support(d, p, i);
 	}
 }
