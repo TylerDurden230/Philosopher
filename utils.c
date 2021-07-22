@@ -71,7 +71,7 @@ void	ft_print(t_data *data, t_philo *philo, int i)
 	if (!(data->is_dead))
 	{
 		printf("%lli ", ft_get_time() - data->start_time);
-		printf("Philosopher %i ", philo->id + 1);
+		printf("Philosopher %i ", philo->id);
 		if (i == 0)
 			printf("has taken the left fork %d\n", philo->left_fork_id);
 		else if (i == 1)
