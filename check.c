@@ -6,7 +6,7 @@
 /*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:10:52 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/22 15:24:38 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/22 18:14:29 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,6 @@ int	ft_error(int error)
 	if (error == 2)
 		write(2, "Error during mutex initialization\n", 34);
 	return (1);
-}
-
-void	ft_check_support(t_data *d, t_philo *p, int i)
-{
-	if (d->nb_meals != -1)
-	{
-		while (i < d->nb_philo && p[i].eaten_meals == d->nb_meals)
-		{
-			i++;
-		}
-	}
-	if (i == d->nb_philo)
-		d->all_ate = 1;
 }
 
 void	ft_check(t_data *d, t_philo *p)
@@ -56,6 +43,5 @@ void	ft_check(t_data *d, t_philo *p)
 		if (d->is_dead)
 			break ;
 		i = 0;
-		ft_check_support(d, p, i);
 	}
 }

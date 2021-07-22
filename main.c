@@ -6,7 +6,7 @@
 /*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:11:13 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/22 16:22:32 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/22 18:14:35 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	*thread(void *void_philosopher)
 	philo = (t_philo *)void_philosopher;
 	data = philo->data;
 	if (philo->id % 2)
-		usleep(1500);
+		usleep(500);
 	while (!(data->is_dead))
 	{
 		ft_eat(philo);
