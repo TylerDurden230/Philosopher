@@ -18,6 +18,13 @@
 # include <sys/time.h>
 # include <pthread.h>
 
+# define LEFT_FORK 0
+# define RIGHT_FORK 1
+# define EAT 2
+# define SLEEP 3
+# define THINK 4
+# define DIE 5
+
 # define RESET   "\033[0m"
 # define BLACK   "\033[30m"					/* Black */
 # define RED     "\033[31m"					/* Red */
@@ -51,7 +58,7 @@ typedef struct s_data
 	long long		start_time;
 	pthread_mutex_t	fork[200];
 	pthread_mutex_t	print;
-	pthread_mutex_t	meal_check;
+	pthread_mutex_t	death_check;
 	t_philo			philo[200];
 }	t_data;
 

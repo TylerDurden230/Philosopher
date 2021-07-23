@@ -24,6 +24,8 @@ int	ft_init_mutex(t_data *data)
 	}
 	if (pthread_mutex_init(&(data->print), NULL))
 		return (1);
+	if (pthread_mutex_init(&(data->death_check), NULL))
+		return (1);
 	return (0);
 }
 

@@ -18,7 +18,7 @@ void	ft_eat(t_philo *philo)
 
 	data = philo->data;
 	pthread_mutex_lock(&(data->fork[philo->left_fork_id]));
-	ft_print(data, philo, 0);
+	ft_print(data, philo, LEFT_FORK);
 	if (philo->data->nb_philo == 1)
 	{
 		smart_sleep(philo->data->ttd, philo->data);
@@ -27,11 +27,9 @@ void	ft_eat(t_philo *philo)
 		return ;
 	}
 	pthread_mutex_lock(&(data->fork[philo->right_fork_id]));
-	ft_print(data, philo, 1);
-	pthread_mutex_lock(&(data->meal_check));
-	ft_print(data, philo, 2);
+	ft_print(data, philo, RIGHT_FORK);
+	ft_print(data, philo, EAT);
 	philo->last_meal_time = ft_get_time();
-	pthread_mutex_unlock(&(data->meal_check));
 	smart_sleep(data->tte, data);
 	(philo->eaten_meals)++;
 	if (philo->eaten_meals == data->nb_meals)
@@ -42,11 +40,9 @@ void	ft_eat(t_philo *philo)
 
 void	*thread(void *void_philosopher)
 {
-	int			i;
 	t_philo		*philo;
 	t_data		*data;
 
-	i = 0;
 	philo = (t_philo *)void_philosopher;
 	data = philo->data;
 	if (philo->id % 2)
@@ -56,11 +52,11 @@ void	*thread(void *void_philosopher)
 		ft_eat(philo);
 		if (data->all_ate || data->is_dead)
 			break ;
-		ft_print(data, philo, 3);
+		ft_print(data, philo, SLEEP);
 		smart_sleep(data->tts, data);
-		ft_print(data, philo, 4);
-		i++;
+		ft_print(data, philo, THINK);
 	}
+	ft_check(data, philo);
 	return (NULL);
 }
 
@@ -121,6 +117,6 @@ int	main(int ac, char **av)
 	if (err)
 		return (ft_error(err));
 	if (ft_start(&data))
-		write(1, "Error: Something gone wrong\n", 28);
+		write(1, "Error: Something's gone wrong\n", 30);
 	return (0);
 }

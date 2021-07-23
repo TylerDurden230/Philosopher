@@ -30,13 +30,13 @@ void	ft_check(t_data *d, t_philo *p)
 		i = 0;
 		while (i < d->nb_philo && !(d->is_dead))
 		{
-			pthread_mutex_lock(&(d->meal_check));
+			pthread_mutex_lock(&(d->death_check));
 			if (time_diff(p[i].last_meal_time, ft_get_time()) > d->ttd)
 			{
-				ft_print(d, &p[i], 5);
+				ft_print(d, &p[i], DIE);
 				d->is_dead = 1;
 			}
-			pthread_mutex_unlock(&(d->meal_check));
+			pthread_mutex_unlock(&(d->death_check));
 			usleep(100);
 			i++;
 		}
