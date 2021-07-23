@@ -63,6 +63,8 @@ typedef struct s_data
 }	t_data;
 
 int			ft_error(int error);
+int 		ft_check_args(int ac, char **av);
+int			ft_single_arg_check(const char *str);
 int			ft_init(t_data *data, char **av);
 void		ft_init_philo(t_data *data);
 int			ft_init_mutex(t_data *data);

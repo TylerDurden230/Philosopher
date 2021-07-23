@@ -113,10 +113,18 @@ int	main(int ac, char **av)
 		write(2, "Error: Wrong number of arguments\n", 33);
 		return (0);
 	}
-	err = ft_init(&data, av);
-	if (err)
-		return (ft_error(err));
-	if (ft_start(&data))
-		write(1, "Error: Something's gone wrong\n", 30);
-	return (0);
+	if (ft_check_args(ac, av) == 1)
+    {
+		err = ft_init(&data, av);
+		if (err)
+			return (ft_error(err));
+		if (ft_start(&data))
+			write(1, "Error: Something's gone wrong\n", 30);
+		return (0);
+    }
+	else
+    {
+        printf("One or more invalid Arguments\n");
+        return (-1);
+    }
 }
