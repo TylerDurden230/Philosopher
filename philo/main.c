@@ -6,7 +6,7 @@
 /*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:11:13 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/22 18:14:35 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:53:47 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ void	ft_eat(t_philo *philo)
 	if (philo->data->nb_philo == 1)
 	{
 		smart_sleep(philo->data->ttd, philo->data);
-		ft_check(philo->data, philo);
+		ft_death_check(philo->data, philo);
 		pthread_mutex_unlock(&(data->fork[philo->left_fork_id]));
 		return ;
 	}
 	pthread_mutex_lock(&(data->fork[philo->right_fork_id]));
 	ft_print(data, philo, RIGHT_FORK);
+	pthread_mutex_lock(&(data->meal_check));
 	ft_print(data, philo, EAT);
 	philo->last_meal_time = ft_get_time();
+	pthread_mutex_unlock(&(data->meal_check));
 	smart_sleep(data->tte, data);
 	(philo->eaten_meals)++;
 	if (philo->eaten_meals == data->nb_meals)
@@ -56,7 +58,7 @@ void	*thread(void *void_philosopher)
 		smart_sleep(data->tts, data);
 		ft_print(data, philo, THINK);
 	}
-	ft_check(data, philo);
+	ft_death_check(data, philo);
 	return (NULL);
 }
 
@@ -87,7 +89,7 @@ int	ft_start(t_data *data)
 			return (1);
 		philo[i].last_meal_time = ft_get_time();
 	}
-	ft_check(data, data->philo);
+	ft_death_check(data, data->philo);
 	ft_finish(data, philo);
 	if (data->nb_meals != -1)
 	{
@@ -114,17 +116,17 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	if (ft_check_args(ac, av) == 1)
-    {
+	{
 		err = ft_init(&data, av);
 		if (err)
 			return (ft_error(err));
 		if (ft_start(&data))
 			write(1, "Error: Something's gone wrong\n", 30);
 		return (0);
-    }
+	}
 	else
-    {
-        printf("One or more invalid Arguments\n");
-        return (-1);
-    }
+	{
+		printf("One or more invalid Arguments\n");
+		return (-1);
+	}
 }

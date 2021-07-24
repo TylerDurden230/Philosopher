@@ -6,7 +6,7 @@
 /*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:11:02 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/22 16:25:28 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:47:26 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_init_mutex(t_data *data)
 	}
 	if (pthread_mutex_init(&(data->print), NULL))
 		return (1);
-	if (pthread_mutex_init(&(data->death_check), NULL))
+	if (pthread_mutex_init(&(data->meal_check), NULL))
 		return (1);
 	return (0);
 }

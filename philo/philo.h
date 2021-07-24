@@ -6,7 +6,7 @@
 /*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:11:35 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/22 17:47:33 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/24 10:44:18 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,19 @@ typedef struct s_data
 	long long		start_time;
 	pthread_mutex_t	fork[200];
 	pthread_mutex_t	print;
-	pthread_mutex_t	death_check;
+	pthread_mutex_t	meal_check;
 	t_philo			philo[200];
 }	t_data;
 
 int			ft_error(int error);
-int 		ft_check_args(int ac, char **av);
+int			ft_check_args(int ac, char **av);
 int			ft_single_arg_check(const char *str);
 int			ft_init(t_data *data, char **av);
 void		ft_init_philo(t_data *data);
 int			ft_init_mutex(t_data *data);
 int			ft_atoi(const char *str);
 int			ft_error(int error);
-void		ft_check(t_data *d, t_philo *p);
+void		ft_death_check(t_data *d, t_philo *p);
 long long	ft_get_time(void);
 void		smart_sleep(long long time, t_data *data);
 long long	time_diff(long long past, long long pres);
