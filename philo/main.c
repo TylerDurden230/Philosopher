@@ -6,7 +6,7 @@
 /*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:11:13 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/24 10:53:47 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/24 11:38:13 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ void	ft_eat(t_philo *philo)
 	data = philo->data;
 	pthread_mutex_lock(&(data->fork[philo->left_fork_id]));
 	ft_print(data, philo, LEFT_FORK);
-	if (philo->data->nb_philo == 1)
-	{
-		smart_sleep(philo->data->ttd, philo->data);
-		ft_death_check(philo->data, philo);
-		pthread_mutex_unlock(&(data->fork[philo->left_fork_id]));
-		return ;
-	}
 	pthread_mutex_lock(&(data->fork[philo->right_fork_id]));
 	ft_print(data, philo, RIGHT_FORK);
 	pthread_mutex_lock(&(data->meal_check));

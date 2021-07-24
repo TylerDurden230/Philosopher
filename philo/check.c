@@ -6,7 +6,7 @@
 /*   By: fd-agnes <fd-agnes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 18:10:52 by fd-agnes          #+#    #+#             */
-/*   Updated: 2021/07/24 11:25:25 by fd-agnes         ###   ########.fr       */
+/*   Updated: 2021/07/24 15:28:39 by fd-agnes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_death_check(t_data *d, t_philo *p)
 	int	i;
 	int	j;
 
-	while (!(d->all_ate))
+	while (!(d->all_ate) && d->is_dead == 0)
 	{
 		i = 0;
 		j = 0;
@@ -78,6 +78,7 @@ void	ft_death_check(t_data *d, t_philo *p)
 				}
 			}
 			pthread_mutex_unlock(&(d->meal_check));
+			usleep(100);
 			i++;
 		}
 	}
